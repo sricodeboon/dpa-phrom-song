@@ -411,3 +411,16 @@ code { font-family:var(--mono); font-size:.9em; background:var(--surface-2); bor
   .donate-body { grid-template-columns:minmax(0,1fr); }
   .pp-card { border-left:0; border-top:1px solid var(--line); }
 }
+/* หุบไว้ตามค่าเริ่มต้น กดแถบเพื่อกาง */
+.donate-sum { cursor:pointer; list-style:none; border-bottom:0; min-height:68px; }
+.donate-sum::-webkit-details-marker { display:none; }
+.donate-sum:hover h2 { color:var(--blue); }
+.donate-sum:focus-visible { outline:2px solid var(--blue); outline-offset:-2px; }
+.donate-d[open] > .donate-sum { border-bottom:1px solid var(--line); }
+.donate-toggle { margin-left:auto; display:flex; align-items:center; gap:6px; color:var(--blue); font-weight:600; white-space:nowrap; }
+.donate-toggle svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform .15s; }
+.donate-d[open] .donate-toggle svg { transform:rotate(180deg); }
+.donate-toggle .t-close, .donate-d[open] .donate-toggle .t-open { display:none; }
+.donate-d[open] .donate-toggle .t-close { display:inline; }
+@media (max-width:640px) { .donate-toggle span { display:none !important; } }
+@media (prefers-reduced-motion:reduce) { .donate-toggle svg { transition:none; } }

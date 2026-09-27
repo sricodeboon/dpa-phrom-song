@@ -40,3 +40,15 @@ pp?.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(pp.dataset.no); pp.textContent = 'คัดลอกแล้ว'; } catch { pp.textContent = pp.dataset.no; }
   setTimeout(() => { pp.textContent = 'คัดลอกเบอร์'; }, 2500);
 });
+
+// 5) ช่องเลี้ยงโอวัลตินหุบไว้ — กางเองเมื่อมาจากลิงก์ #donate (ปุ่ม Sponsor บน GitHub, ลิงก์ท้ายหน้า)
+const dd = $('#donate-d');
+function openDonate() {
+  if (location.hash !== '#donate' || !dd) return;
+  dd.open = true;
+  // เบราว์เซอร์เลื่อนตาม #donate ก่อนกล่องกาง → เลื่อนซ้ำหลังหน้าโหลดเสร็จ
+  const go = () => $('#donate').scrollIntoView({ block: 'start' });
+  if (document.readyState === 'complete') requestAnimationFrame(go); else addEventListener('load', () => setTimeout(go, 50), { once: true });
+}
+addEventListener('hashchange', openDonate);
+openDonate();

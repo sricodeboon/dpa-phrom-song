@@ -278,13 +278,15 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
 
   <!-- ============ เลี้ยงโอวัลติน (พร้อมเพย์) ============ -->
   <section class="win wrap-win donate" id="donate" aria-labelledby="donate-h">
-    <header class="win-head">
+    <details class="donate-d" id="donate-d">
+    <summary class="win-head donate-sum">
       <span class="win-no win-cup" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 7h10v5a4 4 0 01-4 4H8a4 4 0 01-4-4z"/><path d="M14 8.5h1.3a2 2 0 010 4H14"/><path d="M7 2.5c-.8 1 .8 1.8 0 3M10.5 2.5c-.8 1 .8 1.8 0 3"/></svg></span>
       <div>
         <h2 id="donate-h">เลี้ยงโอวัลตินครูแจ็กสักแก้ว</h2>
         <p>ไม่บังคับ ใช้ฟรีทุกฟีเจอร์เหมือนเดิม</p>
       </div>
-    </header>
+      <span class="donate-toggle" aria-hidden="true"><span class="t-open">ดูช่องทางสนับสนุน</span><span class="t-close">ซ่อน</span><svg viewBox="0 0 20 20"><path d="M5.5 8l4.5 4.5L14.5 8"/></svg></span>
+    </summary>
     <div class="donate-body">
       <div class="donate-text">
         <p>DPA พร้อมส่ง ทำโดยครูคนหนึ่งในเวลาหลังเลิกสอน ถ้าช่วยให้ครูส่งงานได้ทันและไม่ต้องนั่งแปลงไฟล์ทั้งคืน เลี้ยงโอวัลตินสักแก้วเป็นกำลังใจได้ครับ</p>
@@ -293,7 +295,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
       </div>
       <figure class="pp-card">
         <figcaption class="pp-head">พร้อมเพย์ · PromptPay</figcaption>
-        <img class="pp-qr" src="/dpa/brand/promptpay-qr.svg" width="220" height="220" alt="QR พร้อมเพย์ 093-073-2896 รัชเดช ศรีแก้ว">
+        <img class="pp-qr" src="/dpa/brand/promptpay-qr.svg" width="220" height="220" loading="lazy" alt="QR พร้อมเพย์ 093-073-2896 รัชเดช ศรีแก้ว">
         <p class="pp-name">รัชเดช ศรีแก้ว</p>
         <p class="pp-no"><span class="mono">093-073-2896</span></p>
         <div class="pp-btns">
@@ -302,6 +304,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
         </div>
       </figure>
     </div>
+    </details>
   </section>
 </main>
 
