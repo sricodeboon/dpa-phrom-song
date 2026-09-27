@@ -3,8 +3,8 @@ declare(strict_types=1);
 // DPA พร้อมส่ง (ดีไซน์ "โต๊ะช่าง") · ทำงานในเบราว์เซอร์ทั้งหมด ไม่มีไฟล์ของครูขึ้นเซิร์ฟเวอร์
 if (PHP_SAPI !== 'cli' && extension_loaded('zlib') && !ini_get('zlib.output_compression')) ob_start('ob_gzhandler');
 $url = 'https://sricodeboon.infinityfreeapp.com/dpa/';
-$title = 'DPA พร้อมส่ง · ย่อไฟล์วิดีโอการสอน แปลง MOV เป็น MP4 รวม PDF ฟรี';
-$desc = 'ย่อไฟล์วิดีโอการสอน 5 GB ให้เหลือไม่เกิน 500 MB แปลง MOV จาก iPhone เป็น MP4 ตัดคลิปให้ไม่เกิน 60 นาที รวม PDF ไม่เกิน 10 หน้า ทำในเครื่องของครูเอง ไม่ต้องลงโปรแกรม ไม่อัปโหลดไฟล์';
+$title = 'DPA พร้อมส่ง · แปลงไฟล์ MOV เป็น MP4 ลดขนาดคลิปสอน จัดผลงานนักเรียนเป็น PDF ฟรี';
+$desc = 'แปลงไฟล์คลิปสอนจาก iPhone (MOV) เป็น MP4 ลดขนาดไฟล์หลาย GB ตรวจความยาวตามเกณฑ์ 60/10 นาที ตัดหัว-ตัดท้าย และจัดรูปผลงานนักเรียนเป็น PDF หน้าละไม่เกิน 6 ภาพ ทำในเครื่องของครูเอง ไม่ต้องลงโปรแกรม ไม่อัปโหลดไฟล์';
 $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'), @filemtime(__DIR__ . '/style.css'));
 ?>
 <!doctype html>
@@ -16,7 +16,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
 <meta name="description" content="<?= htmlspecialchars($desc) ?>">
 <meta property="og:type" content="website">
 <meta property="og:url" content="<?= $url ?>">
-<meta property="og:title" content="DPA พร้อมส่ง · ย่อไฟล์วิดีโอการสอนฟรี">
+<meta property="og:title" content="DPA พร้อมส่ง · แปลงไฟล์ลดขนาดคลิปสอนฟรี">
 <meta property="og:description" content="<?= htmlspecialchars($desc) ?>">
 <meta property="og:image" content="<?= $url ?>og.png">
 <meta name="theme-color" content="#0F2438">
@@ -31,6 +31,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
 <style><?php readfile(__DIR__ . '/style.css'); ?></style>
 </head>
 <body>
+<noscript><p class="noscript">หน้านี้ต้องเปิด JavaScript ในเบราว์เซอร์จึงจะใช้งานได้</p></noscript>
 <a class="skip" href="#video">ข้ามไปที่เครื่องมือ</a>
 
 <header class="top">
@@ -42,7 +43,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
     <a class="tool-name" href="/">โดย ศรี<span class="b">{</span><span class="c">โค้ด</span><span class="b">}</span>บูรณ์</a>
     <nav class="tabs" aria-label="ส่วนของเครื่องมือ">
       <a href="#video" data-tab="video">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>วิดีโอ</a>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>คลิป</a>
       <a href="#pdf" data-tab="pdf">
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.5 10h5M7.5 13h5"/></svg>PDF</a>
       <a href="#check" data-tab="check">
@@ -60,7 +61,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
     <div class="intro-text">
       <p class="eyebrow">DPA พร้อมส่ง · ประเมินวิทยฐานะ</p>
       <h1 id="intro-h">เตรียมไฟล์ส่ง DPA<br>ในเครื่องของครูเอง</h1>
-      <p class="lede">ย่อวิดีโอการสอนที่ใหญ่หลาย GB แปลง MOV จาก iPhone เป็น MP4 ตัดส่วนที่เกินเวลา และรวม PDF ไม่เกิน 10 หน้า</p>
+      <p class="lede">แปลงไฟล์ MOV จากไอโฟนเป็น MP4 ลดขนาดคลิปสอนที่ใหญ่หลาย GB ตรวจความยาวตามเกณฑ์ และจัดรูปผลงานนักเรียนเป็น PDF (ไม่เกิน 10 หน้าต่อไฟล์)</p>
     </div>
     <dl class="plate" aria-label="ข้อมูลเครื่องมือ">
       <div><dt>ค่าใช้จ่าย</dt><dd><b>ฟรี</b> ไม่ต้องสมัครสมาชิก</dd></div>
@@ -76,8 +77,8 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
     <header class="win-head">
       <span class="win-no" aria-hidden="true">1</span>
       <div>
-        <h2 id="video-h">ย่อและแปลงวิดีโอ</h2>
-        <p>ไฟล์จากมือถือหรือกล้อง MOV, MP4, M4V, WebM</p>
+        <h2 id="video-h">แปลงไฟล์และลดขนาดคลิป</h2>
+        <p>คลิปจากไอโฟน มือถือ หรือกล้อง (MOV, MP4, M4V, WebM)</p>
       </div>
     </header>
 
@@ -85,18 +86,18 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
       <fieldset class="cell kinds">
         <legend class="cell-label"><span class="n" aria-hidden="true">1</span>ไฟล์นี้คือ</legend>
         <div class="seg">
-          <label><input type="radio" name="kind" value="3600" data-label="วิดีโอการสอน" checked><span class="seg-t">วิดีโอการสอน</span><span class="seg-s">ไม่เกิน 60 นาที</span></label>
-          <label><input type="radio" name="kind" value="600" data-label="วิดีโอแรงบันดาลใจ"><span class="seg-t">วิดีโอแรงบันดาลใจ</span><span class="seg-s">ไม่เกิน 10 นาที</span></label>
-          <label><input type="radio" name="kind" value="600" data-label="วิดีโอผลลัพธ์ผู้เรียน"><span class="seg-t">วิดีโอผลลัพธ์ผู้เรียน</span><span class="seg-s">ไม่เกิน 10 นาที</span></label>
+          <label><input type="radio" name="kind" value="3600" data-label="คลิปการสอน" checked><span class="seg-t">คลิปการสอน</span><span class="seg-s">ไม่เกิน 60 นาที</span></label>
+          <label><input type="radio" name="kind" value="600" data-label="คลิปแรงบันดาลใจ"><span class="seg-t">คลิปแรงบันดาลใจ</span><span class="seg-s">ไม่เกิน 10 นาที</span></label>
+          <label><input type="radio" name="kind" value="600" data-label="คลิปผลลัพธ์ผู้เรียน"><span class="seg-t">คลิปผลลัพธ์ผู้เรียน</span><span class="seg-s">ไม่เกิน 10 นาที</span></label>
         </div>
       </fieldset>
 
       <div class="cell pick">
-        <p class="cell-label"><span class="n" aria-hidden="true">2</span>เลือกไฟล์วิดีโอ</p>
+        <p class="cell-label"><span class="n" aria-hidden="true">2</span>เลือกไฟล์คลิป</p>
         <label class="drop" id="v-drop">
           <input type="file" id="v-file" accept="video/*,.mov,.mp4,.m4v,.webm,.mkv">
           <svg class="drop-icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="3.5" y="7.5" width="18" height="17" rx="2"/><path d="M21.5 13.5l7-4v13l-7-4"/></svg>
-          <span class="drop-main">ลากไฟล์วิดีโอมาวางตรงนี้</span>
+          <span class="drop-main">ลากไฟล์คลิปมาวางตรงนี้</span>
           <span class="drop-or">หรือ</span>
           <span class="drop-btn">กดเลือกไฟล์จากเครื่อง</span>
           <span class="drop-sub">ไฟล์ใหญ่แค่ไหนก็ได้ ระบบอ่านจากเครื่องโดยตรง</span>
@@ -109,25 +110,33 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
           <div class="field">
             <label for="v-target" class="cell-label"><span class="n" aria-hidden="true">3</span>ขนาดไฟล์ที่ต้องการ</label>
             <select id="v-target">
-              <option value="300">ไม่เกิน 300 MB (เน็ตช้า)</option>
-              <option value="500" selected>ไม่เกิน 500 MB (แนะนำ)</option>
+              <option value="1000" selected>ไม่เกิน 1 GB (แนะนำ · ชัดระดับ HD)</option>
               <option value="800">ไม่เกิน 800 MB</option>
-              <option value="1000">ไม่เกิน 1 GB</option>
+              <option value="500">ไม่เกิน 500 MB</option>
+              <option value="300">ไม่เกิน 300 MB (เน็ตช้ามาก)</option>
             </select>
+            <p class="hint">ก.ค.ศ. ไม่ได้กำหนดขนาดสูงสุด ระบบ DPA รับไฟล์เกิน 1 GB ได้ ตัวเลือกนี้มีไว้ให้อัปโหลดง่ายขึ้น</p>
           </div>
           <div class="field">
-            <span class="cell-label"><span class="n" aria-hidden="true">4</span>ช่วงที่จะเก็บไว้ <em>ไม่บังคับ</em></span>
+            <span class="cell-label"><span class="n" aria-hidden="true">4</span>ตัดหัว-ตัดท้าย <em>ไม่บังคับ</em></span>
             <div class="trim">
               <label><span>เริ่มที่</span><input id="v-start" inputmode="numeric" placeholder="0:00" autocomplete="off"></label>
               <span class="trim-to" aria-hidden="true">→</span>
               <label><span>จบที่</span><input id="v-end" inputmode="numeric" placeholder="60:00" autocomplete="off"></label>
             </div>
-            <p class="hint">ใช้ตัดช่วงเตรียมกล้องตอนต้นหรือท้ายคลิป · พิมพ์ <code>1:30</code> = นาทีที่ 1 วินาทีที่ 30 · พิมพ์เลขเดียว = นาที</p>
+            <p class="hint">พิมพ์ <code>1:30</code> = นาทีที่ 1 วินาทีที่ 30 · พิมพ์เลขเดียว = นาที</p>
+            <p class="rule" id="v-rule"></p>
+          </div>
+          <div class="field" id="v-planmin-wrap">
+            <label for="v-planmin" class="cell-label"><span class="n" aria-hidden="true">5</span>เวลาในแผนการสอน <em>นาที · ไม่บังคับ</em></label>
+            <input id="v-planmin" inputmode="numeric" placeholder="เช่น 50" autocomplete="off">
+            <p class="hint">ใส่ไว้เพื่อเทียบกับความยาวคลิป กรรมการดูว่าเวลาในแผนตรงกับคลิปจริงหรือไม่</p>
           </div>
           <div class="know-wrap">
             <p class="know-h">ข้อควรรู้ก่อนกดเริ่ม</p>
             <ul class="know">
               <li>ไฟล์ต้นฉบับไม่ถูกแก้ไข ได้ไฟล์ใหม่ชื่อลงท้ายว่า <code>-DPA.mp4</code></li>
+              <li>การแปลงเป็น MP4 และลดขนาดไฟล์ <b>ไม่นับเป็นการตัดต่อ</b> ตามแนวทางของ ก.ค.ศ.</li>
               <li>ใน Chrome และ Edge เครื่องจะถามที่บันทึกไฟล์ก่อนเริ่ม</li>
               <li>ระหว่างแปลงใช้โปรแกรมอื่นได้ แต่อย่าปิดแท็บหรือพับฝาโน้ตบุ๊ก</li>
             </ul>
@@ -177,7 +186,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
             <div><dt>ชนิดไฟล์</dt><dd>—</dd></div>
           </dl>
         </div>
-        <p class="empty-note">เลือกไฟล์วิดีโอก่อน ระบบจะอ่านไฟล์แล้วบอกว่า <b>ต้องแปลงหรือไม่</b> และจะได้ไฟล์ขนาดเท่าไร</p>
+        <p class="empty-note">เลือกไฟล์คลิปก่อน ระบบจะอ่านไฟล์แล้วบอกว่า <b>ต้องแปลงหรือไม่</b> และจะได้ไฟล์ขนาดเท่าไร</p>
       </div>
     </div>
   </section>
@@ -187,8 +196,8 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
     <header class="win-head">
       <span class="win-no" aria-hidden="true">2</span>
       <div>
-        <h2 id="pdf-h">รวมเป็น PDF</h2>
-        <p>รวม PDF และรูปถ่ายผลงานนักเรียนเป็นไฟล์เดียว เลือกเฉพาะหน้าที่ต้องการ</p>
+        <h2 id="pdf-h">จัดผลงานนักเรียนเป็น PDF</h2>
+        <p>รวม PDF และรูปถ่ายผลงาน จัดหน้าละไม่เกิน 6 ภาพพร้อมคำอธิบายใต้ภาพ แยกไฟล์ละไม่เกิน 10 หน้า</p>
       </div>
     </header>
 
@@ -196,7 +205,7 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
       <div class="cell pick">
         <p class="cell-label"><span class="n" aria-hidden="true">1</span>เพิ่มไฟล์</p>
         <label class="drop drop-sm" id="p-drop">
-          <input type="file" id="p-file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" multiple>
+          <input type="file" id="p-file" accept="application/pdf,image/jpeg,image/png,image/heic,.pdf,.jpg,.jpeg,.png,.heic" multiple>
           <svg class="drop-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3.5h11l5.5 5.5v19.5H8z"/><path d="M19 3.5V9h5.5M12 15h9M12 19.5h9M12 24h5"/></svg>
           <span class="drop-main">ลาก PDF หรือรูป JPG/PNG มาวาง</span>
           <span class="drop-btn">กดเลือกไฟล์ (หลายไฟล์ได้)</span>
@@ -206,13 +215,24 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
       <div id="p-panel" hidden>
         <div class="cell settings">
           <div class="field">
-            <label for="p-pages" class="cell-label"><span class="n" aria-hidden="true">2</span>เลือกหน้า <em>เว้นว่าง = ทุกหน้า</em></label>
+            <label for="p-per" class="cell-label"><span class="n" aria-hidden="true">2</span>รูปต่อหน้า</label>
+            <select id="p-per">
+              <option value="1">1 ภาพต่อหน้า</option>
+              <option value="2">2 ภาพต่อหน้า</option>
+              <option value="4" selected>4 ภาพต่อหน้า</option>
+              <option value="6">6 ภาพต่อหน้า (สูงสุดตามเกณฑ์)</option>
+            </select>
+            <p class="hint">ใช้กับรูป JPG/PNG · เกณฑ์ ก.ค.ศ. หน้าละไม่เกิน 6 ภาพ และต้องมีคำอธิบายใต้ภาพ พิมพ์คำอธิบายได้ในรายการด้านข้าง</p>
+          </div>
+          <div class="field">
+            <label for="p-pages" class="cell-label"><span class="n" aria-hidden="true">3</span>เลือกหน้า <em>เว้นว่าง = ทุกหน้า</em></label>
             <input id="p-pages" placeholder="เช่น 1-5, 8, 10" inputmode="numeric" autocomplete="off">
             <p class="hint">นับเลขหน้าต่อกันทั้งชุด ตามลำดับในรายการ</p>
           </div>
           <div class="field">
-            <label for="p-name" class="cell-label"><span class="n" aria-hidden="true">3</span>ชื่อไฟล์</label>
+            <label for="p-name" class="cell-label"><span class="n" aria-hidden="true">4</span>ชื่อไฟล์</label>
             <div class="suffix"><input id="p-name" value="ผลงานนักเรียน" autocomplete="off"><span aria-hidden="true">.pdf</span></div>
+            <label class="check-inline"><input type="checkbox" id="p-split" checked> แยกเป็นไฟล์ละไม่เกิน 10 หน้าให้อัตโนมัติ</label>
           </div>
         </div>
 
@@ -250,18 +270,20 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
       <div class="cell">
         <ul class="checklist" id="checklist">
           <li><label><input type="checkbox" data-k="plan"> <span><b>แผนการจัดการเรียนรู้</b> เป็น PDF 1 ไฟล์ ตรงกับคาบที่ถ่ายวิดีโอ</span></label></li>
-          <li><label><input type="checkbox" data-k="teach"> <span><b>วิดีโอการสอน</b> MP4 ความยาวไม่เกิน 60 นาที เห็นบรรยากาศและผู้เรียนชัด</span></label></li>
-          <li><label><input type="checkbox" data-k="inspire"> <span><b>วิดีโอแรงบันดาลใจ</b> ไม่เกิน 10 นาที เล่าสภาพปัญหาและที่มา</span></label></li>
-          <li><label><input type="checkbox" data-k="result"> <span><b>ผลลัพธ์การเรียนรู้ของผู้เรียน</b> เป็นวิดีโอหรือ PDF ตามจำนวนที่ระบบให้แนบ</span></label></li>
+          <li><label><input type="checkbox" data-k="teach"> <span><b>คลิปการสอน</b> MP4 ไม่เกิน 60 นาที ถ่ายต่อเนื่องครั้งเดียว ไม่ตัดต่อ ไม่มีไตเติล ไม่มีดนตรีประกอบ เห็นบรรยากาศและผู้เรียนชัด</span></label></li>
+          <li><label><input type="checkbox" data-k="inspire"> <span><b>คลิปแรงบันดาลใจ</b> ไม่เกิน 10 นาที ครูนำเสนอเอง เล่าสภาพปัญหาและที่มา แทรกภาพได้ แต่ไม่มีไตเติล ดนตรี เอฟเฟกต์เสียง หรือตัวอักษรวิ่ง</span></label></li>
+          <li><label><input type="checkbox" data-k="result"> <span><b>ผลลัพธ์การเรียนรู้ของผู้เรียน</b> รวมไม่เกิน 3 ไฟล์ เป็นคลิปได้ 1 ไฟล์ (ไม่เกิน 10 นาที) ที่เหลือเป็น PDF ไฟล์ละไม่เกิน 10 หน้า รูปหน้าละไม่เกิน 6 ภาพพร้อมคำอธิบาย</span></label></li>
           <li><label><input type="checkbox" data-k="play"> <span>เปิดไฟล์ที่ย่อแล้วดูจนจบ <b>ภาพและเสียงชัด</b> ไม่กระตุก</span></label></li>
           <li><label><input type="checkbox" data-k="name"> <span>ตั้งชื่อไฟล์ให้อ่านรู้เรื่อง เช่น <code>วิดีโอการสอน-คณิต-ป4.mp4</code></span></label></li>
+          <li><label><input type="checkbox" data-k="plantime"> <span><b>เวลาในแผน</b> ตรงกับความยาวคลิปการสอนจริง</span></label></li>
+          <li><label><input type="checkbox" data-k="recheck"> <span>หลังอัปโหลด ให้สถานศึกษา<b>ดาวน์โหลดไฟล์กลับมาเปิดตรวจ</b>ก่อนกดส่งคำขอ</span></label></li>
           <li><label><input type="checkbox" data-k="backup"> <span>เก็บต้นฉบับไว้ในไดรฟ์หรือแฟลชไดรฟ์ จนกว่าผลประเมินจะออก</span></label></li>
         </ul>
       </div>
       <aside class="cell sheet check-side">
         <p class="sheet-title">ความคืบหน้า</p>
         <p class="check-count" id="check-count"></p>
-        <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <p class="note">ตรวจกับประกาศและคู่มือ ก.ค.ศ. ฉบับล่าสุดอีกครั้งก่อนยื่น</p>
         <div class="share">
           <p class="share-h">ช่วยบอกต่อเพื่อนครู</p>
@@ -273,6 +295,43 @@ $v = (string) max(@filemtime(__DIR__ . '/app.js'), @filemtime(__DIR__ . '/ui.js'
           </div>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <!-- ============ คำถามที่ครูถามบ่อย ============ -->
+  <section class="win wrap-win faq" id="faq" aria-labelledby="faq-h">
+    <header class="win-head">
+      <span class="win-no" aria-hidden="true">?</span>
+      <div>
+        <h2 id="faq-h">คำถามที่ครูถามบ่อย</h2>
+        <p>รวบรวมจากคำถามในกลุ่มครูที่ยื่นประเมินวิทยฐานะ</p>
+      </div>
+    </header>
+    <div class="faq-list">
+      <details>
+        <summary>คลิปการสอนยาวเกิน 60 นาทีนิดหน่อย ทำอย่างไรได้บ้าง</summary>
+        <p>คลิปการสอนต้องถ่ายต่อเนื่องครั้งเดียว (One-Take) ห้ามตัดต่อ ตัดได้เฉพาะช่วงตั้งกล้องก่อนเริ่มสอนหรือหลังจบคาบ <b>ห้ามตัดกลางคลิปและห้ามเร่งความเร็ว</b> ถ้าตัวบทเรียนเองยาวเกิน 60 นาทีควรถ่ายใหม่ และตั้งเวลาในแผนให้ตรงกับคลิปจริง</p>
+      </details>
+      <details>
+        <summary>ไฟล์ลดจาก 5 GB เหลือไม่ถึง 1 GB ผิดเกณฑ์ไหม</summary>
+        <p>ไม่ผิด การแปลงเป็น MP4 และลดขนาดไฟล์ไม่นับเป็นการตัดต่อ ก.ค.ศ. เองก็แนะนำให้แปลงเป็น MP4 ความละเอียด 720p ซึ่งเป็นค่าที่เครื่องมือนี้ใช้เมื่อเลือกขนาด 1 GB</p>
+      </details>
+      <details>
+        <summary>เอาคลิปใหญ่ออกจากไอโฟนมาใส่คอมอย่างไร</summary>
+        <p>ต่อสายชาร์จเข้าคอม Windows แล้วเปิดแอป "รูปภาพ" (Photos) เลือก "นำเข้า" · ถ้าเป็น Mac ใช้ AirDrop หรือแอป "จับภาพ" (Image Capture) · อัปขึ้น Google Drive ก็ได้ถ้าพื้นที่พอ (บัญชีฟรีมี 15 GB)</p>
+      </details>
+      <details>
+        <summary>ตั้งค่าไอโฟนก่อนอัดคลิปยาวอย่างไรให้ไม่มีปัญหา</summary>
+        <p>ไปที่ การตั้งค่า › กล้อง › บันทึกวิดีโอ เลือก 1080p ที่ 30 fps · ถ้าเลือก การตั้งค่า › กล้อง › รูปแบบ › "เข้ากันได้มากที่สุด" จะได้ไฟล์ที่เปิดได้ทุกเครื่องแต่ใหญ่ขึ้นเกือบเท่าตัว · ก่อนอัดเปิดโหมดเครื่องบิน เสียบสายชาร์จ ถอดเคส และตรวจพื้นที่ว่าง คลิป 1 ชั่วโมงใช้พื้นที่ราว 4–8 GB</p>
+      </details>
+      <details>
+        <summary>อัปขึ้นระบบ DPA แล้วค้างที่ process นาน</summary>
+        <p>ระบบต้องประมวลผลไฟล์ใหญ่สักพัก ให้รอจนขึ้นภาพตัวอย่างก่อนกดส่ง ถ้าค้างนานหลายชั่วโมงให้รีเฟรชแล้วอัปใหม่ · ก.ค.ศ. แนะนำให้ลองเปลี่ยนเบราว์เซอร์ถ้าอัปไฟล์ใหญ่ไม่ผ่าน · ไฟล์จากเครื่องมือนี้จัดเรียงแบบ Web Optimized ตามที่ ก.ค.ศ. แนะนำ</p>
+      </details>
+      <details>
+        <summary>รูปจากไอโฟนเป็น HEIC ใช้ได้ไหม</summary>
+        <p>ยังใช้ไม่ได้ ให้ตั้งค่าไอโฟนเป็น "เข้ากันได้มากที่สุด" ก่อนถ่าย หรือส่งรูปผ่าน LINE หรืออีเมลซึ่งจะแปลงเป็น JPG ให้เอง</p>
+      </details>
     </div>
   </section>
 

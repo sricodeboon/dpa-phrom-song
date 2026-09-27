@@ -424,3 +424,25 @@ code { font-family:var(--mono); font-size:.9em; background:var(--surface-2); bor
 .donate-d[open] .donate-toggle .t-close { display:inline; }
 @media (max-width:640px) { .donate-toggle span { display:none !important; } }
 @media (prefers-reduced-motion:reduce) { .donate-toggle svg { transition:none; } }
+
+/* ---------- ส่วนที่เพิ่มหลังตรวจเกณฑ์ ก.ค.ศ. และความต้องการของครู ---------- */
+.rule { margin-top:10px; padding:10px 12px; border-left:3px solid var(--gold-bg); background:var(--surface-2); border-radius:0 4px 4px 0; font-size:.9375rem; color:var(--ink-2); }
+.rule b { color:var(--ink); }
+.plan-warn { display:inline-block; margin-top:6px; color:var(--pink); font-weight:500; }
+.plan-ok { display:inline-block; margin-top:6px; color:var(--blue); font-weight:500; }
+.check-inline { display:flex; align-items:center; gap:10px; margin-top:12px; min-height:44px; cursor:pointer; }
+.check-inline input { width:20px; height:20px; accent-color:var(--blue); flex:none; }
+.files .cap { grid-column:2 / -1; width:100%; min-height:40px; margin:0 0 6px; padding:0 10px; border:1px solid var(--line-strong); border-radius:4px; background:var(--surface); font-size:.9375rem; }
+.files .cap:focus { outline:2px solid var(--focus); outline-offset:1px; }
+.faq-list { display:grid; }
+.faq-list details { border-top:1px solid var(--line); }
+.faq-list details:first-child { border-top:0; }
+.faq-list summary { cursor:pointer; list-style:none; padding:16px 56px 16px 24px; font-weight:600; position:relative; min-height:44px; }
+.faq-list summary::-webkit-details-marker { display:none; }
+.faq-list summary::after { content:"+"; position:absolute; right:24px; top:50%; transform:translateY(-50%); font-family:var(--mono); font-size:1.25rem; color:var(--blue); }
+.faq-list details[open] summary::after { content:"–"; }
+.faq-list summary:hover { color:var(--blue); }
+.faq-list summary:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+.faq-list details p { margin:0; padding:0 24px 18px; color:var(--ink-2); max-width:52rem; }
+.noscript { margin:0; padding:12px 16px; background:var(--gold-soft, #FBF1DC); color:#0F2438; text-align:center; font-weight:600; }
+@media (max-width:640px) { .faq-list summary { padding:14px 48px 14px 16px; } .faq-list summary::after { right:16px; } .faq-list details p { padding:0 16px 16px; } }
