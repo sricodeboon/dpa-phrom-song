@@ -2,6 +2,9 @@
 declare(strict_types=1);
 // DPA พร้อมส่ง (ดีไซน์ "โต๊ะช่าง") · ทำงานในเบราว์เซอร์ทั้งหมด ไม่มีไฟล์ของครูขึ้นเซิร์ฟเวอร์
 if (PHP_SAPI !== 'cli' && extension_loaded('zlib') && !ini_get('zlib.output_compression')) ob_start('ob_gzhandler');
+// CSP: ทุกอย่างมาจากเว็บเดียวกัน (ไม่มี CDN ภายนอก จึงไม่ต้องใช้ SRI) · Mediabunny สร้าง Worker จาก blob: และอาจใช้ WebAssembly
+// → worker-src blob: + 'wasm-unsafe-eval' · ไฟล์ผลลัพธ์/พรีวิวเป็น blob: · <style> inline จาก PHP readfile จึงต้อง 'unsafe-inline' เฉพาะ style
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'");
 $url = 'https://sricodeboon.infinityfreeapp.com/dpa/';
 $title = 'DPA พร้อมส่ง · แปลงไฟล์ MOV เป็น MP4 ลดขนาดคลิปสอน จัดผลงานนักเรียนเป็น PDF ฟรี';
 $desc = 'แปลงไฟล์คลิปสอนจาก iPhone (MOV) เป็น MP4 ลดขนาดไฟล์หลาย GB ตรวจความยาวตามเกณฑ์ 60/10 นาที ตัดหัว-ตัดท้าย และจัดรูปผลงานนักเรียนเป็น PDF หน้าละไม่เกิน 6 ภาพ ทำในเครื่องของครูเอง ไม่ต้องลงโปรแกรม ไม่อัปโหลดไฟล์';

@@ -174,7 +174,7 @@ function renderVideo() {
     ['ความยาว', `<span class="${info.dur > limit + EPS ? 'over' : ''}">${fmtTime(info.dur)}</span>`],
     ['ขนาด', fmtSize(info.size)],
     ['ภาพ', `${info.dw}×${info.dh}${info.fps ? ` · ${Math.round(info.fps)} fps` : ''}`],
-    ['ชนิดไฟล์', `${info.container} · ${info.codecName}${info.acodec ? ` + ${info.acodec.toUpperCase()}` : ' · ไม่มีเสียง'}`],
+    ['ชนิดไฟล์', `${esc(info.container)} · ${esc(info.codecName)}${info.acodec ? ` + ${esc(String(info.acodec).toUpperCase())}` : ' · ไม่มีเสียง'}`],
   ].map(([k, v, c]) => `<div><dt>${k}</dt><dd class="${c || ''}">${v}</dd></div>`).join('');
   $('#v-end').placeholder = fmtTime(info.dur);
 
